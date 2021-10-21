@@ -22,6 +22,10 @@ app:
   greet:
     msg: Hello Microservice!
 
+user:
+  firstName: abc
+  lastName: 123
+
 management:
   endpoints:
     web:
