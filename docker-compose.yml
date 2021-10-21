@@ -1,0 +1,49 @@
+version: '3'
+services:
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+        # Port used for the Zipkin UI and HTTP Api
+      - "9411:9411"
+
+  eureka:
+    image: localhost:5000/ryang420/eureka-server:PACKT-SNAPSHOT
+    container_name: eureka
+    ports:
+      - "8761:8761"
+
+  config:
+    image: localhost:5000/ryang420/config-server:PACKT-SNAPSHOT
+    container_name: config
+    ports:
+      - "8888:8888"
+
+  restaurant-service:
+    image: localhost:5000/ryang420/restaurant-service:PACKT-SNAPSHOT
+    container_name: restaurant-service01
+    ports:
+      - "8080:8080"
+    links:
+      - eureka
+      - config
+
+  booking-service:
+    image: localhost:5000/ryang420/booking-service:PACKT-SNAPSHOT
+    container_name: booking-service01
+    ports:
+      - "8081:8080"
+    links:
+      - eureka
+      - config
+
+  user-service:
+    image: localhost:5000/ryang420/user-service:PACKT-SNAPSHOT
+    container_name: user-service01
+    restart: on-failure
+    ports:
+      - "8082:8080"
+    depends_on:
+      - zipkin
+      - eureka
+      - config
