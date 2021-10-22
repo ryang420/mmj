@@ -126,7 +126,7 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
 <!--                    <phase>integration-test</phase>-->
-                    <groups>com.packtpub.mmj.user.resources.docker.DockerIT</groups>
+                    <groups>com.epam.mmj.user.resources.docker.DockerIT</groups>
                     <systemPropertyVariables>
                         <service.url>http://${docker.host.address}:${docker.port}/</service.url>
                     </systemPropertyVariables>
