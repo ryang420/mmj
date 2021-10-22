@@ -6,17 +6,9 @@ spring:
     fallback-to-system-locale: false
   cloud:
     config:
-      uri: http://config:8888
+      uri: http://localhost:8888
       fail-fast: false
       label: master
-  zipkin:
-    base-url: http://zipkin:9411
-    discovery-client-enabled: false
-    sender:
-      type: web
-  sleuth:
-    sampler:
-      probability: 1
 
 app:
   greet:
@@ -54,6 +46,26 @@ server:
 
 
 ---
+#docker env
+spring:
+  application:
+    name: user-service  # Service registers under this name
+  profiles: docker
+  messages:
+    fallback-to-system-locale: false
+  cloud:
+    config:
+      uri: http://config:8888
+      fail-fast: false
+      label: master
+  zipkin:
+    base-url: http://zipkin:9411
+    discovery-client-enabled: false
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1
 
 server:
   port: 8080
